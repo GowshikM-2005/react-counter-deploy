@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-counter-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: react-counter
+  template:
+    metadata:
+      labels:
+        app: react-counter
+    spec:
+      containers:
+      - name: react-counter-container
+        image: gowshik/react-counter-app:v1
+        ports:
+        - containerPort: 80
+---
+

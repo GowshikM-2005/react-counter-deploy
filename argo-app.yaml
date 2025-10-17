@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: react-counter-app          # Name of the ArgoCD application
+  namespace: argocd                # Must be deployed in argocd namespace
+spec:
+  project: default                 # Or a custom ArgoCD project
+
+  source:
+    repoURL: https://github.com/your-org/react-counter-deploy.git  # GitOps repo URL
+    targetRevision: main           # Branch to watch
+    path: k8s                      # Folder where Kubernetes YAML files exist
+
+  destination:
+    server: https://kubernetes.default.svc # Target Kubernetes cluster
+    namespace: default             # Namespace to deploy into
+
+  syncPolicy:
+    automated:
+      prune: true                  # Delete resources not in Git anymore
+      selfHeal: true               # Auto-fix drift if someone manually changes cluster
+    syncOptions:
+      - CreateNamespace=true       # Auto-create namespace if it doesn't exist
