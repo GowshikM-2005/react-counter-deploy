@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: react-counter-container
-        image: gowshikm/counter-app:v47
+        image: gowshikm/counter-app:v54
         ports:
         - containerPort: 80
 ---
